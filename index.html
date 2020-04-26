@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="p5.js"></script>
+    <script type="text/javascript" src="Jathp.js"></script>
+
+
+  </head>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="text-center">Project 1</h1>
+    </div>
+      <div id="instruction" class="row justify-content-md-center">
+        Hello
+      </div>
+      <div class="row justify-content-md-center">
+        <button id="btn" type="button" class="btn btn-danger btn-sm">I am a button!</button>
+      <div style="display: none" id=path></div>
+    </div>
+    <br><br>
+
+</div>
+
+
+</body>
+
+<script type="text/lisp"> ;File: prelude.lsp
+; This file contains aliases and common definitions.
+; It also imports the javascript Math functions.
+
+(def + plus)
+(def define def)
+(def #t 't)
+(def #f Nil)
+(def nil Nil)
+(def - minus)
+(def / divide)
+(def % rem)
+(def * times)
+(def = equal)
+(def eq? equal)
+(def head car)
+(def first car)
+(def tail cdr)
+(def rest cdr)
+(def eq equal)
+(defun null (x) (equal x Nil))
+(defun zerop (x) (equal x 0))
+(defun plusp (x) (> x 0))
+(defun minusp (x) (< x 0))
+(defun evenp (x) (equal (rem x 2) 0))
+(defun oddp (x) (/= (rem x 2) 1))
+(def document (js "document"))
+(def body (js "document.body"))
+(def window (js "window"))
+(def getElement (method document "getElementById"))
+(def alert (method window "alert"))
+(def message alert)
+(def confirm (method window "confirm"))
+(def console (js "console"))
+
+;; CS: print fcn for Jathp (to console)
+;; Must create a print-string for the value.
+;; [CS: Crash sensitivity to dbl-quoted open, "("; needs leading space.]
+(defun stgr (rx)
+  (cond
+   ((numberp rx) (concat "" rx))
+   ((null rx) "nil")
+   ((stringp rx) rx)
+   ((atom rx) (concat "" rx))
+   ((functionp rx) (fcn-guts rx))
+;   ((functionp rx) "[function]")
+   ((consp rx)
+    (let* ((open (substring " (" 1 2)) ;; use space before '(': Crash sensitive.
+           (rxlen (length rx))
+           (retv (concat open (stgr (car rx))))) ;; Recur on lkid/car.
+      (setq rx (cdr rx))
+      (while rx
+        (setq retv (concat retv " " (stgr (car rx)))) ;; Recur on lkid/car.
+        (setq rx (cdr rx)))
+      (concat retv ")")))
+   (t "[Unknown object]")))
+
+(defun logr (rx) ;; Shorter way to 'console.log in JS'.
+  (let ((log (method console "log")))
+    (log (stgr rx)))) ;; Nicer to strigify the lisp expr first.
+;; tests
+
+;; CS: pprint the Javathcript prelude fragment.
+(defun member (E L) ;; CS: orig name was "list-member", non-std.
+(cond
+ ((null L) Nil) ;; Not found in list L.
+ ((equal E (first L)) E) ;; Found E, return L's remainder CS:. Orig retval = 't.
+ ('t (member E (rest L)))))  ;; Not in head, check tail.
+
+(defun map (F L) ;;convert L=(e1 e2 ... eN) to ((F e1) (F e2) ... (F eN))
+(if (null L)
+    Nil
+  (cons (F (head L))
+        (map F (tail L)))))
+
+
+; CADDRs
+
+(defun caar (x) (car (car x)))
+(defun cadr (x) (car (cdr x)))
+(defun cdar (x) (cdr (car x)))
+(defun cddr (x) (cdr (cdr x)))
+(defun caaar (x) (car (car (car x))))
+(defun caadr (x) (car (car (cdr x))))
+(defun cadar (x) (car (cdr (car x))))
+(defun caddr (x) (car (cdr (cdr x))))
+(defun cdaar (x) (cdr (car (car x))))
+(defun cdadr (x) (cdr (car (cdr x))))
+(defun cddar (x) (cdr (cdr (car x))))
+(defun cdddr (x) (cdr (cdr (cdr x))))
+(defun caaaar (x) (car (car (car (car x)))))
+(defun caaadr (x) (car (car (car (cdr x)))))
+(defun caadar (x) (car (car (cdr (car x)))))
+(defun caaddr (x) (car (car (cdr (cdr x)))))
+(defun cadaar (x) (car (cdr (car (car x)))))
+(defun cadadr (x) (car (cdr (car (cdr x)))))
+(defun caddar (x) (car (cdr (cdr (car x)))))
+(defun cadddr (x) (car (cdr (cdr (cdr x)))))
+(defun cdaaar (x) (cdr (car (car (car x)))))
+(defun cdaadr (x) (cdr (car (car (cdr x)))))
+(defun cdadar (x) (cdr (car (cdr (car x)))))
+(defun cdaddr (x) (cdr (car (cdr (cdr x)))))
+(defun cddaar (x) (cdr (cdr (car (car x)))))
+(defun cddadr (x) (cdr (cdr (car (cdr x)))))
+(defun cdddar (x) (cdr (cdr (cdr (car x)))))
+(defun cddddr (x) (cdr (cdr (cdr (cdr x)))))
+
+; To be more like emacs, you might want to uncomment these two lines
+; (def setp set)
+; (def set def)
+
+; Import PI and the javascript math functions.
+;; CS: pprint the Javathcript prelude fragment.
+
+(let* ((math (js "Math"))
+     (import-math
+      (lambda (funcname)
+        (def-dyn funcname (method math funcname)))))
+(map import-math
+     '(sin cos tan asin acos atan atan2
+       abs floor ceil round trunc
+       max min
+       pow exp sqrt log log2 log10
+       hypot
+       random)))
+
+;; Jathp extras via defines; put here to be in correct scope.
+(def expt pow)
+(def != /=)
+
+</script>
+
+
+<script type="text/lisp">
+
+(defun append (l val)
+(cond
+((null l) val)
+('t (cons (car l)
+(append (cdr l) val)))))
+
+(defun member (E L)
+(cond
+((null L) Nil)
+((equal E (first L)) L) ;Return modified.
+('t (member E (rest L)))))
+
+
+;"Return a list with the given elements in reverse order, or nil."
+(defun reverse (rlist)
+  (if (consp rlist) ;; Else nil.
+      (let ((retv nil))
+        (while rlist
+          (setq retv (cons (car rlist) retv))
+          (setq rlist (cdr rlist)))
+        retv)))
+
+(defun remove (val l)
+    (let* ((known (member val l)))
+      (cond
+      (known
+      (let ((pre-list (cdr (member val (reverse l)))))
+      (append (reverse pre-list) (cdr known))))
+      ('t l))))
+
+(defun minimum (list)
+       (cond ((null list)
+              nil)
+             ((null (rest list))
+              (first list))
+             ((< (first list) (second list))
+              (minimum (cons (first list)
+                             (rest (rest list)))))
+             (t
+              (minimum (rest list)))))
+
+(defun position-in-list (letter list)
+      (cond
+        ((null list)            nil)
+          ((eq (car list) letter) 0)
+          (t
+            (+ 1 (position-in-list letter (cdr list))))))
+
+ (defun len (list)
+      (if list
+        (+ 1 (len (cdr list)))
+        0))
+
+(defun eliminateDuplicates (L)
+      (cond ((null L) L)
+          ((member (car L) (cdr L))
+             (eliminateDuplicates (cdr L)))
+                (t (cons (car L) (eliminateDuplicates (cdr L))))))
+
+(defun get-min (m l)
+  (cond ((null (car l)) m)
+    ((< (car l) m) (get-min (car l) (cdr l)))
+      (t (get-min m  (cdr l))))
+)
+
+(defun isInList (el l)
+  (cond
+   ((null l) nil)
+   ((equal el (car l)) t)
+   ((consp (car l)) (or (isInList el (car l))
+                        (isInList el (cdr l))))
+   (t (isInList el (cdr l)))))
+
+
+
+(defun getNature (rand)
+  (if (> 1 rand)
+    (setq n "Cloudy")
+    (setq n "Sunny")
+  )
+)
+
+
+(setq nature (getNature (* 10 (random 1))))
+(logr nature)
+
+(if (eq nature "Cloudy")
+    (if (> 4 (* 10 (random 1)))
+      (logr "Rain")
+    )
+)
+
+
+(let  ((h (js "document.getElementById('path')")))
+  (set h "innerHTML" path)
+)
+
+(let  ((i (js "document.getElementById('instruction')")))
+  (set i "innerHTML" "Lisp are done!")
+)
+
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+</html>
