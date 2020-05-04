@@ -4,3 +4,20 @@
   margin-right: auto;
   width: 50%;
 }
+
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+canvas {
+  background-color: black;
+}
+
+input {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: auto;
+}

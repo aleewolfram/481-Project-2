@@ -1,35 +1,34 @@
-<!DOCTYPE html>
-<html>
-<body>
-  <head>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="p5.js"></script>
-    <script type="text/javascript" src="Jathp.js"></script>
 
+<!DOCTYPE html> 
+<body>   
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Project 2: Farmzoids</title>     
+    <link rel="stylesheet" href="styles.css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    
+    <script type="text/javascript" src="index.js"></script>
+    <script src="p5.js"></script>    
+    <script type="text/javascript" src="Jathp.js"></script>    
 
   </head>
+    <h1>Project 2: Farmzoids</h1> 
 
-  <div class="container">
-    <div class="page-header">
-      <h1 class="text-center">Project 1</h1>
-    </div>
-      <div id="instruction" class="row justify-content-md-center">
-        Hello
-      </div>
-      <div class="row justify-content-md-center">
-        <button id="btn" type="button" class="btn btn-danger btn-sm">I am a button!</button>
-      <div style="display: none" id=path></div>
-    </div>
-    <br><br>
-
+    <div class="container">
+  <div class="row">
+       <span id="displayer"></span>
+      <button id="nextDay" type="button" class="btn btn-success mr-3">Start Farm</button>
+  </div>
+  <br>
 </div>
 
+</body>   
 
-</body>
 
 <script type="text/lisp"> ;File: prelude.lsp
 ; This file contains aliases and common definitions.
@@ -240,7 +239,6 @@
    (t (isInList el (cdr l)))))
 
 
-
 (defun getNature (rand)
   (if (> 1 rand)
     (setq n "Cloudy")
@@ -248,24 +246,46 @@
   )
 )
 
+(let*
+    ( (button (getElement "nextDay"))
+      (clickHandler (lambda () 
+                      (let ((nature (getNature (* 10 (random 1)))))
 
-(setq nature (getNature (* 10 (random 1))))
-(logr nature)
+                        (if (eq nature "Cloudy")
+                          (if (> 4 (* 10 (random 1)))
+                              (setq nature "Rain")
+                          )
+                        ) 
+                        (logr "Weather: ")
+                        (logr nature)
 
-(if (eq nature "Cloudy")
-    (if (> 4 (* 10 (random 1)))
-      (logr "Rain")
+                        (if (eq nature "Sunny")
+                          (let  ((w (js "document.getElementById('displayer')")))
+                            (set w "innerHTML" "<img src='images/sun.png' style='width:50px;height:50px;'>")
+                          )
+                        )
+
+                        (if (eq nature "Cloudy")
+                          (let  ((w (js "document.getElementById('displayer')")))
+                            (set w "innerHTML" "<img src='images/cloud.png' style='width:50px;height:50px;'>")
+                          )
+                        )
+
+                        (if (eq nature "Rain")
+                          (let  ((w (js "document.getElementById('displayer')")))
+                            (set w "innerHTML" "<img src='images/rain.png' style='width:50px;height:50px;'>")
+                          )
+                        )
+
+                        (let  ((btn (js "document.getElementById('nextDay')")))
+                          (set btn "innerHTML" "Next Day")
+                        )
+                      )
+                    )
+      )  
     )
-)
-
-
-(let  ((h (js "document.getElementById('path')")))
-  (set h "innerHTML" path)
-)
-
-(let  ((i (js "document.getElementById('instruction')")))
-  (set i "innerHTML" "Lisp are done!")
-)
+    (set button "onclick" (export clickHandler))
+  )
 
 </script>
 
