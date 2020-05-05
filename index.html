@@ -21,6 +21,7 @@
 
     <div class="container">
   <div class="row">
+      <span class="h4">Day = <span id="dayCount" class="h4">0</span> </span>
        <span id="displayer"></span>
       <button id="nextDay" type="button" class="btn btn-success mr-3">Start Farm</button>
   </div>
@@ -165,80 +166,7 @@
 
 <script type="text/lisp">
 
-(defun append (l val)
-(cond
-((null l) val)
-('t (cons (car l)
-(append (cdr l) val)))))
-
-(defun member (E L)
-(cond
-((null L) Nil)
-((equal E (first L)) L) ;Return modified.
-('t (member E (rest L)))))
-
-
-;"Return a list with the given elements in reverse order, or nil."
-(defun reverse (rlist)
-  (if (consp rlist) ;; Else nil.
-      (let ((retv nil))
-        (while rlist
-          (setq retv (cons (car rlist) retv))
-          (setq rlist (cdr rlist)))
-        retv)))
-
-(defun remove (val l)
-    (let* ((known (member val l)))
-      (cond
-      (known
-      (let ((pre-list (cdr (member val (reverse l)))))
-      (append (reverse pre-list) (cdr known))))
-      ('t l))))
-
-(defun minimum (list)
-       (cond ((null list)
-              nil)
-             ((null (rest list))
-              (first list))
-             ((< (first list) (second list))
-              (minimum (cons (first list)
-                             (rest (rest list)))))
-             (t
-              (minimum (rest list)))))
-
-(defun position-in-list (letter list)
-      (cond
-        ((null list)            nil)
-          ((eq (car list) letter) 0)
-          (t
-            (+ 1 (position-in-list letter (cdr list))))))
-
- (defun len (list)
-      (if list
-        (+ 1 (len (cdr list)))
-        0))
-
-(defun eliminateDuplicates (L)
-      (cond ((null L) L)
-          ((member (car L) (cdr L))
-             (eliminateDuplicates (cdr L)))
-                (t (cons (car L) (eliminateDuplicates (cdr L))))))
-
-(defun get-min (m l)
-  (cond ((null (car l)) m)
-    ((< (car l) m) (get-min (car l) (cdr l)))
-      (t (get-min m  (cdr l))))
-)
-
-(defun isInList (el l)
-  (cond
-   ((null l) nil)
-   ((equal el (car l)) t)
-   ((consp (car l)) (or (isInList el (car l))
-                        (isInList el (cdr l))))
-   (t (isInList el (cdr l)))))
-
-
+;Helper function to get a randomized weather
 (defun getNature (rand)
   (if (> 1 rand)
     (setq n "Cloudy")
@@ -246,11 +174,17 @@
   )
 )
 
+;Setting an on click handler for the next day button to run logic to next day
 (let*
-    ( (button (getElement "nextDay"))
+    ((button (getElement "nextDay"))
       (clickHandler (lambda () 
                       (let ((nature (getNature (* 10 (random 1)))))
 
+                        ;Increment the date to the next day and set the display
+                        (js "incrementDate()")
+
+
+                        ;If it is Cloudy is it also raining?
                         (if (eq nature "Cloudy")
                           (if (> 4 (* 10 (random 1)))
                               (setq nature "Rain")
@@ -259,24 +193,26 @@
                         (logr "Weather: ")
                         (logr nature)
 
+
+                        ;Setting the picture to display the current weather
                         (if (eq nature "Sunny")
                           (let  ((w (js "document.getElementById('displayer')")))
                             (set w "innerHTML" "<img src='images/sun.png' style='width:50px;height:50px;'>")
                           )
                         )
-
                         (if (eq nature "Cloudy")
                           (let  ((w (js "document.getElementById('displayer')")))
                             (set w "innerHTML" "<img src='images/cloud.png' style='width:50px;height:50px;'>")
                           )
                         )
-
                         (if (eq nature "Rain")
                           (let  ((w (js "document.getElementById('displayer')")))
                             (set w "innerHTML" "<img src='images/rain.png' style='width:50px;height:50px;'>")
                           )
                         )
 
+
+                        ;Changing the button to next Day if after start
                         (let  ((btn (js "document.getElementById('nextDay')")))
                           (set btn "innerHTML" "Next Day")
                         )
