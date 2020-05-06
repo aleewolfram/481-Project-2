@@ -161,6 +161,62 @@
 (def expt pow)
 (def != /=)
 
+;helper function for append
+(defun append (l val)
+(cond
+((null l) val)
+('t (cons (car l)
+(append (cdr l) val)))))
+
+;function to get minimum value in a given list
+(defun get-min (m l)
+  (cond ((null (car l)) m)
+    ((< (car l) m) (get-min (car l) (cdr l)))
+      (t (get-min m  (cdr l))))
+)
+
+
+;Helper function to get the length of a given list
+ (defun len (list)
+      (if list
+        (+ 1 (len (cdr list)))
+        0)
+ )
+
+;Helper function to get the position of an element in a list
+(defun position-in-list (letter list)
+      (cond
+        ((null list)            nil)
+          ((eq (car list) letter) 0)
+          (t
+            (+ 1 (position-in-list letter (cdr list))))))
+
+;Helper function to remove given element in a give list
+(defun remove (val l)
+    (let* ((known (member val l)))
+      (cond
+      (known
+      (let ((pre-list (cdr (member val (reverse l)))))
+      (append (reverse pre-list) (cdr known))))
+      ('t l)))
+)
+
+;Helper function to return a list with the given elements in reverse order, or nil
+(defun reverse (rlist)
+  (if (consp rlist) ;; Else nil.
+      (let ((retv nil))
+        (while rlist
+          (setq retv (cons (car rlist) retv))
+          (setq rlist (cdr rlist)))
+        retv)))
+
+;Helper function for member
+(defun member (E L)
+(cond
+((null L) Nil)
+((equal E (first L)) L) ;Return modified.
+('t (member E (rest L)))))
+
 </script>
 
 
@@ -173,6 +229,342 @@
     (setq n "Sunny")
   )
 )
+
+;---------------------------------------------------WHERE TO GO
+
+;lists to display locations within farm
+(def plots (list '(3 33) '(5 5) '(5 10) '(5 21) '(5 26) '(7 15) '(8 10) '(8 21) '(10 15) '(12 27) '(12 34) '(14 3) '(15 14) '(15 29) '(16 35) '(19 32) '(20 10) '(23 29) '(26 31) '(27 24) '(30 31) '(31 27) '(33 36) '(34 26) '(36 34) ))
+
+(def river (list '(25 1) '(25 2) '(26 2) '(26 3) '(27 3) '(27 4) '(28 4) '(28 5) '(30 6) '(30 7) '(31 7) '(31 8) '(32 8) '(32 9) '(33 9) '(33 10) '(35 11) '(35 12) '(36 12) '(36 13) '(37 13) '(37 14) '(38 14) '(38 15) ))
+
+(def cave (list '(26 14) '(26 15) '(26 16) '(26 17) '(26 18) '(27 14) '(27 15) '(27 16) '(27 17) '(27 18) '(28 14) '(28 15) '(28 16) '(28 17) '(28 18) '(29 14) '(29 15) '(29 16) '(29 17) '(29 18) ))
+
+(def barn (list '(19 19) ))
+
+(def farmzoid1 (list 18 19) )
+(def farmzoid1_goto (list ))
+(setq farmzoids1_moves 50)
+(def farmzoid2 (list 19 18) )
+(def farmzoid2_goto (list ))
+(setq farmzoids2_moves 50)
+
+(def farmzoid3 (list 19 20) )
+(def farmzoid3_goto (list ))
+(setq farmzoids3_moves 50)
+
+(def farmzoid4 (list 20 19) )
+(def farmzoid4_goto (list ))
+(setq farmzoids4_moves 50)
+
+
+;setting the open plots to visit all plots initially
+(setq openPlots plots)
+(logr openPlots)
+
+;-------------------------------getting where farmzoid 1 will do and list of his destinations 
+
+;(setq currentFarmzoid farmzoid1)
+;(logr "Currentfarmzoid location=")
+;(logr currentFarmzoid)
+
+;going places until all the farmzoids moves are used up
+(while (> farmzoids1_moves 0)
+
+(setq i 0)
+(setq listOfOptions (list ))
+
+(setq size (len openPlots))
+;(logr "size of openPlots=")
+;(logr size)
+
+(while (< i size)
+(setq plot (nth i openPlots))
+(setq plotx (nth 0 plot))
+(setq ploty (nth 1 plot))
+
+
+(setq farmzoidx (nth 0 currentFarmzoid))
+(setq farmzoidy (nth 1 currentFarmzoid))
+
+;use manhattan distance
+(setq val1 (- farmzoidx plotx))
+(setq val2 (- farmzoidy ploty))
+(if (< val1 0)
+(setq val1 (* val1 -1))
+)
+(if (< val2 0)
+(setq val2 (* val2 -1))
+)
+(setq dist (+ val1 val2))
+
+
+;(logr "plotx=")
+;(logr plotx)
+;(logr "ploty=")
+;(logr ploty)
+
+;(logr "farmzoidx=")
+;(logr farmzoidx)
+;(logr "farmzoidy=")
+;(logr farmzoidy)
+
+;(logr "distance=")
+;(logr dist)
+
+(setq listOfOptions (append listOfOptions (list dist)))
+;(logr "listOfOptions=")
+;(logr listOfOptions)
+
+(setq i (+ i 1))
+
+)
+
+;get min distance from farmzoids current location
+(setq min (get-min 1000 listOfOptions))
+(setq minIndex (position-in-list min listOfOptions))
+
+;(logr "min=")
+;(logr min)
+;(logr "min index=")
+;(logr minIndex)
+
+
+; --- if farmzoid doesn't have enough moves left go back home
+
+(if (> min farmzoids1_moves)
+;(logr "Not enough farmzoids1_moves left!!!")
+)
+
+;set moves to zero to stop loop
+(if (> min farmzoids1_moves)
+(setq farmzoids1_moves 0)
+)
+
+;go back home
+(if (> min farmzoids1_moves)
+(setq farmzoid1_goto (append farmzoid1_goto (list farmzoid1)))
+)
+
+; --- if farmzoid has enough moves
+
+(if (< min farmzoids1_moves)
+;(logr "It is big enough!!!")
+)
+
+;subtract the amount of moves from farmzoids current moves
+(if (< min farmzoids1_moves)
+(setq farmzoids1_moves (- farmzoids1_moves min))
+)
+
+; go to that location
+(if (< min farmzoids1_moves)
+(setq farmzoid1_goto (append farmzoid1_goto (list (nth minIndex openPlots))))
+)
+
+;set farmzoids location to the new plot location
+(if (< min farmzoids1_moves)
+(setq currentFarmzoid (nth minIndex openPlots))
+)
+
+;remove the gone to location from the list of open plots
+(if (< min farmzoids1_moves)
+(setq openPlots (remove (nth minIndex openPlots) openPlots))
+)
+
+
+;(logr "farmzoid_goto=")
+;(logr farmzoid1_goto)
+;(logr "openPlots=")
+;(logr openPlots)
+;(logr "farmzoids1_moves left=")
+;(logr farmzoids1_moves)
+;(logr "currentfarmzoid=")
+;(logr currentFarmzoid)
+
+)
+
+
+(logr "openPlots=")
+(logr openPlots)
+(logr "FINAL farmzoid1: ")
+(logr farmzoid1_goto)
+
+;add to js arrs to map to them
+(setq i 0)
+(setq size (len farmzoid1_goto))
+
+(while (< i size)
+
+(setq point (nth i farmzoid1_goto))
+(setq x (nth 0 point))
+(setq y (nth 1 point))
+
+(setq code "addToFarmZoidGoTo(1,")
+(setq code (concat code x))
+(setq code (concat code ","))
+(setq code (concat code y))
+(setq code (concat code ")"))
+(js code)
+
+(setq i (+ i 1))
+
+)
+
+;(js "printGoTo(1)")
+
+
+
+;-------------------------------getting where farmzoid 2 will do and list of his destinations 
+
+(setq currentFarmzoid farmzoid2)
+;(logr "Currentfarmzoid location=")
+;(logr currentFarmzoid)
+
+;going places until all the current farmzoids moves are used up
+(while (> farmzoids2_moves 0)
+
+(setq i 0)
+(setq listOfOptions (list ))
+
+(setq size (len openPlots))
+;(logr "size of openPlots=")
+;(logr size)
+
+(while (< i size)
+(setq plot (nth i openPlots))
+(setq plotx (nth 0 plot))
+(setq ploty (nth 1 plot))
+
+
+(setq farmzoidx (nth 0 currentFarmzoid))
+(setq farmzoidy (nth 1 currentFarmzoid))
+
+;use manhattan distance
+(setq val1 (- farmzoidx plotx))
+(setq val2 (- farmzoidy ploty))
+(if (< val1 0)
+(setq val1 (* val1 -1))
+)
+(if (< val2 0)
+(setq val2 (* val2 -1))
+)
+(setq dist (+ val1 val2))
+
+
+;(logr "plotx=")
+;(logr plotx)
+;(logr "ploty=")
+;(logr ploty)
+
+;(logr "farmzoidx=")
+;(logr farmzoidx)
+;(logr "farmzoidy=")
+;(logr farmzoidy)
+
+;(logr "distance=")
+;(logr dist)
+
+(setq listOfOptions (append listOfOptions (list dist)))
+;(logr "listOfOptions=")
+;(logr listOfOptions)
+
+(setq i (+ i 1))
+
+)
+
+;get min distance from farmzoids current location
+(setq min (get-min 1000 listOfOptions))
+(setq minIndex (position-in-list min listOfOptions))
+
+;(logr "min=")
+;(logr min)
+;(logr "min index=")
+;(logr minIndex)
+
+
+; --- if farmzoid doesn't have enough moves left go back home
+
+(if (> min farmzoids2_moves)
+;(logr "Not enough farmzoids2_moves left!!!")
+)
+
+;set moves to zero to stop loop
+(if (> min farmzoids2_moves)
+(setq farmzoids2_moves 0)
+)
+
+;go back home
+(if (> min farmzoids2_moves)
+(setq farmzoid2_goto (append farmzoid2_goto (list farmzoid2)))
+)
+
+; --- if farmzoid has enough moves
+
+(if (< min farmzoids2_moves)
+;(logr "It is big enough!!!")
+)
+
+;subtract the amount of moves from farmzoids current moves
+(if (< min farmzoids2_moves)
+(setq farmzoids2_moves (- farmzoids2_moves min))
+)
+
+; go to that location
+(if (< min farmzoids2_moves)
+(setq farmzoid2_goto (append farmzoid2_goto (list (nth minIndex openPlots))))
+)
+
+;set farmzoids location to the new plot location
+(if (< min farmzoids2_moves)
+(setq currentFarmzoid (nth minIndex openPlots))
+)
+
+;remove the gone to location from the list of open plots
+(if (< min farmzoids2_moves)
+(setq openPlots (remove (nth minIndex openPlots) openPlots))
+)
+
+
+;(logr "farmzoid_goto=")
+;(logr farmzoid2_goto)
+;(logr "openPlots=")
+;(logr openPlots)
+;(logr "farmzoids2_moves left=")
+;(logr farmzoids2_moves)
+;(logr "currentfarmzoid=")
+;(logr currentFarmzoid)
+
+)
+
+
+(logr "openPlots=")
+(logr openPlots)
+(logr "FINAL farmzoid2: ")
+(logr farmzoid2_goto)
+
+;add to js arrs to map to them
+(setq i 0)
+(setq size (len farmzoid2_goto))
+
+(while (< i size)
+
+(setq point (nth i farmzoid2_goto))
+(setq x (nth 0 point))
+(setq y (nth 1 point))
+
+(setq code "addToFarmZoidGoTo(2,")
+(setq code (concat code x))
+(setq code (concat code ","))
+(setq code (concat code y))
+(setq code (concat code ")"))
+(js code)
+
+(setq i (+ i 1))
+
+)
+
+;(js "printGoTo(2)")
+
 
 ;Setting an on click handler for the next day button to run logic to next day
 (let*
@@ -194,6 +586,7 @@
                         (logr nature)
 
 
+
                         ;Setting the picture to display the current weather
                         (if (eq nature "Sunny")
                           (let  ((w (js "document.getElementById('displayer')")))
@@ -210,6 +603,11 @@
                             (set w "innerHTML" "<img src='images/rain.png' style='width:50px;height:50px;'>")
                           )
                         )
+
+                        ;run the whatToDo function passing in the nature parameter
+                        (setq jscode (concat "whatToDo('" nature))
+                        (setq jscode (concat jscode "')"))
+                        ;(js jscode)
 
 
                         ;Changing the button to next Day if after start

@@ -8,7 +8,7 @@ let farm = [
     ["open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
-    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],   
+    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
@@ -18,9 +18,9 @@ let farm = [
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
-    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "farmzoid", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
-    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "farmzoid", "barn", "farmzoid", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open"],
-    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "farmzoid", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
+    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "farmzoid1", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
+    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "farmzoid2", "barn", "farmzoid3", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open"],
+    ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "farmzoid4", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "empty plot", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"],
@@ -42,7 +42,53 @@ let farm = [
     ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"]
 ];
 
-function draw_farm( rminor, rmajor) 
+//arrays to hold the locations for easy locating
+var plots = [];
+var river = [];
+var barn = [];
+var cave = [];
+let farmzoid1Pos = [18,19];
+let farmzoid2Pos = [19,18];
+let farmzoid3Pos = [19,20];
+let farmzoid4Pos = [20,19];
+
+//initializing arrays to hold the locations for easy locating
+
+for(var i=0; i < 40; i++)
+    {
+        for(var j=0; j < 40; j++)
+        {
+        //intialize arrays based on initial farm
+            if(farm[i][j] != "open")
+            {
+                if(farm[i][j] == "empty plot")
+                {
+                    var plot = [i, j];
+                    plots.push(plot);
+                }
+                else if(farm[i][j] == "river")
+                {
+                    var water = [i, j];
+                    river.push(water);
+                }
+                else if(farm[i][j] == "cave")
+                {
+                    var mine = [i, j];
+                    cave.push(mine);
+                }
+                else if(farm[i][j] == "barn")
+                {
+                    var barnspot = [i, j];
+                    barn.push(barnspot);
+                }
+            }
+        }
+    }
+
+
+//draw functions
+
+function draw_farm( rminor, rmajor)
 {
     stroke( "Chocolate" );
     fill( "Chocolate" );
@@ -90,11 +136,28 @@ function draw_farm( rminor, rmajor)
                 {
                     fill('Red');
                 }
-                else if(farm[i][j] == "farmzoid")
+                else if(farm[i][j] == "farmzoid1")
                 {
-                    fill('Grey');
+                    fill('Purple');
+                }
+                else if(farm[i][j] == "farmzoid2")
+                {
+                    fill('Yellow');
+                }
+                else if(farm[i][j] == "farmzoid3")
+                {
+                    fill('Aqua');
+                }
+                else if(farm[i][j] == "farmzoid4")
+                {
+                    fill('Green');
                 }
                 rect(j * size, i * size, size, size)
+            }
+            else
+            {
+              fill('Saddlebrown');
+              rect(j * size, i * size, size, size)
             }
         }
     }
@@ -102,17 +165,16 @@ function draw_farm( rminor, rmajor)
 
 function setup() // P5 Setup Fcn
 {
-    
+
     g_canvas = { cell_size:20, wid:40, hgt:40 };
     g_frame_cnt = 0; // Setup a P5 display-frame counter to do the animation.
     g_frame_mod = 24; // Update 'mod' frames.
     g_stop = 0; // Go by default.
 
     let size = g_canvas.cell_size;
-    let width = size * g_canvas.wid; 
+    let width = size * g_canvas.wid;
     let height = size * g_canvas.hgt;
-    g_cnv = createCanvas( width, height ); 
-    background('SaddleBrown')
+    g_cnv = createCanvas( width, height );
     draw_farm( 20, 50);
 
 }
@@ -122,10 +184,118 @@ function setup() // P5 Setup Fcn
 
 var farmDayCounter = 0;
 
+var farmzoid1_goto = [];
+var farmzoid2_goto = [];
+var farmzoid3_goto = [];
+var farmzoid4_goto = [];
+
+function addToFarmZoidGoTo(farmzoidNum, x, y)
+{
+    var point = [x,y];
+    switch(farmzoidNum)
+    {
+        case 1:
+            farmzoid1_goto.push(point);
+            break;
+        case 2:
+            farmzoid2_goto.push(point);
+            break;
+        case 3:
+            farmzoid3_goto.push(point);
+            break;
+        case 4:
+            farmzoid4_goto.push(point);
+            break;
+    }
+}
+
+function printGoTo(farmzoidNum)
+{
+    var arr;
+    switch(farmzoidNum)
+    {
+        case 1:
+            arr = farmzoid1_goto;
+            break;
+        case 2:
+            arr = farmzoid2_goto;
+            break;
+        case 3:
+            arr = farmzoid3_goto;
+            break;
+        case 4:
+            arr = farmzoid4_goto;
+            break;
+    }
+
+    var s = "";
+    for(var i=0; i < arr.length; i++)
+    {
+        s += "[" + arr[i][0] + ", " + arr[i][1] + "] ";
+    }
+    console.log(s);
+}
+
 function incrementDate()
 {
     farmDayCounter++;
     console.log("Day = " + farmDayCounter);
     $("#dayCount").html(farmDayCounter);
 }
+
+function whatToDo(weather)
+{
+    console.log("The weather passed in is: " + weather);
+    if(weather == "Sunny")
+    {
+       
+
+    }
+
+}
+
+
+function showFarm()
+{
+    for(var i=0; i < 40; i++)
+    {
+         var str = "";
+        for(var j=0; j < 40; j++)
+        {
+            if(farm[i][j] == "open")
+            {
+                str += "-,";
+            }
+            else
+            {
+                str += farm[i][j] + ",";
+            }
+        }
+        console.log(str);
+    }
+}
+
+//-------------------------------------------------DRAW LOGIC
+/*
+
+function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
+{
+    ++g_frame_cnt;
+    if (0 == g_frame_cnt % g_frame_mod)
+    {
+        farm[farmzoid1Pos[0]][farmzoid1Pos[1]]= "open";
+        farmzoid1Pos[0] += 1;
+        farmzoid1Pos[1] += 1;
+        farm[farmzoid1Pos[0]][farmzoid1Pos[1]]= "farmzoid1";
+        console.log( "g_frame_cnt = " + g_frame_cnt );
+        draw_update();
+    }
+}
+
+function draw_update()  // Update our display.
+{
+    console.log( "Call draw_farm" );
+    draw_farm(20,50)
+}
+*/
 
