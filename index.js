@@ -211,24 +211,27 @@ function addToFarmZoidGoTo(farmzoidNum, x, y)
 
 function printGoTo(farmzoidNum)
 {
-    var arr;
+    var arr, s = "";
+
     switch(farmzoidNum)
     {
         case 1:
             arr = farmzoid1_goto;
+            s += "Farmzoid 1 Places To Go = "
             break;
         case 2:
             arr = farmzoid2_goto;
+            s += "Farmzoid 2 Places To Go = "
             break;
         case 3:
             arr = farmzoid3_goto;
+            s += "Farmzoid 3 Places To Go = "
             break;
         case 4:
             arr = farmzoid4_goto;
+            s += "Farmzoid 4 Places To Go = "
             break;
     }
-
-    var s = "";
     for(var i=0; i < arr.length; i++)
     {
         s += "[" + arr[i][0] + ", " + arr[i][1] + "] ";
