@@ -19,7 +19,7 @@
     <h1>Project 2: Farmzoids</h1>
 
     <div class="container">
-  <div class="row">
+  <div class="row" id="rowView">
       <span class="h4">Day = <span id="dayCount" class="h4">0</span> </span>
        <span id="displayer"></span>
       <button id="nextDay" type="button" class="btn btn-success mr-3">Start Farm</button>
@@ -252,7 +252,6 @@
                         (setq rand (* 10 (random 10)))
                         (if (eq wind "Wind")
                           (let()
-                            (logr rand)
                             (if (> 2.5 rand)
                               (let  ((w (js "document.getElementById('wind')")))
                                 (set w "innerHTML" "Wind - N")
@@ -283,10 +282,6 @@
                               (setq nature "Rain")
                           )
                         )
-                        (logr "Weather: ")
-                        (logr nature)
-                        (logr "Wind: ")
-                        (logr wind)
 
                         ;Setting the picture to display the current weather
                         (if (eq nature "Sunny")
@@ -305,16 +300,8 @@
                           )
                         )
 
-                        ;run the whatToDo function passing in the nature parameter
-                        (setq jscode (concat "whatToDo('" nature))
-                        (setq jscode (concat jscode "')"))
-                        ;(js jscode)
-
-
-                        ;Changing the button to next Day if after start
-                        (let  ((btn (js "document.getElementById('nextDay')")))
-                          (set btn "innerHTML" "Next Day")
-                        )
+                        ;Changing the button to hide after the farm starts
+                        (js "$('#nextDay').hide();")
 
                         ;---------------------------------------------------WHERE TO GO
 
@@ -345,13 +332,9 @@
 
 ;setting the open plots to visit all plots initially
 (setq openPlots plots)
-;(logr openPlots)
-
 ;-------------------------------getting where farmzoid 1 will do and list of his destinations
 
-;(setq currentFarmzoid farmzoid1)
-;(logr "Currentfarmzoid location=")
-;(logr currentFarmzoid)
+(setq currentFarmzoid farmzoid1)
 
 ;going places until all the farmzoids moves are used up
 (while (> farmzoids1_moves 0)
@@ -360,8 +343,6 @@
 (setq listOfOptions (list ))
 
 (setq size (len openPlots))
-;(logr "size of openPlots=")
-;(logr size)
 
 (while (< i size)
 (setq plot (nth i openPlots))
@@ -384,19 +365,7 @@
 (setq dist (+ val1 val2))
 
 
-;(logr "plotx=")
-;(logr plotx)
-;(logr "ploty=")
-;(logr ploty)
-;(logr "farmzoidx=")
-;(logr farmzoidx)
-;(logr "farmzoidy=")
-;(logr farmzoidy)
-;(logr "distance=")
-;(logr dist)
 (setq listOfOptions (append listOfOptions (list dist)))
-;(logr "listOfOptions=")
-;(logr listOfOptions)
 
 (setq i (+ i 1))
 
@@ -406,17 +375,7 @@
 (setq min (get-min 1000 listOfOptions))
 (setq minIndex (position-in-list min listOfOptions))
 
-;(logr "min=")
-;(logr min)
-;(logr "min index=")
-;(logr minIndex)
-
-
 ; --- if farmzoid doesn't have enough moves left go back home
-
-(if (>= min farmzoids1_moves)
-;(logr "Not enough farmzoids1_moves left!!!")
-)
 
 ;set moves to zero to stop loop
 (if (>= min farmzoids1_moves)
@@ -429,10 +388,6 @@
 )
 
 ; --- if farmzoid has enough moves
-
-(if (< min farmzoids1_moves)
-;(logr "It is big enough!!!")
-)
 
 ;subtract the amount of moves from farmzoids current moves
 (if (< min farmzoids1_moves)
@@ -454,20 +409,7 @@
 (setq openPlots (remove (nth minIndex openPlots) openPlots))
 )
 
-
-;(logr "farmzoid_goto=")
-;(logr farmzoid1_goto)
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "farmzoids1_moves left=")
-;(logr farmzoids1_moves)
-;(logr "currentfarmzoid=")
-;(logr currentFarmzoid)
 )
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "FINAL farmzoid1: ")
-;(logr farmzoid1_goto)
 
 ;add to js arrs to map to them
 (setq i 0)
@@ -490,16 +432,11 @@
 
 )
 
-;(js "printGoTo(1)")
-;(js "run_full_path(1)")
-
 
 
 ;-------------------------------getting where farmzoid 2 will do and list of his destinations
 
 (setq currentFarmzoid farmzoid2)
-;(logr "Currentfarmzoid location=")
-;(logr currentFarmzoid)
 
 ;going places until all the current farmzoids moves are used up
 (while (> farmzoids2_moves 0)
@@ -508,8 +445,6 @@
 (setq listOfOptions (list ))
 
 (setq size (len openPlots))
-;(logr "size of openPlots=")
-;(logr size)
 
 (while (< i size)
 (setq plot (nth i openPlots))
@@ -531,20 +466,7 @@
 )
 (setq dist (+ val1 val2))
 
-
-;(logr "plotx=")
-;(logr plotx)
-;(logr "ploty=")
-;(logr ploty)
-;(logr "farmzoidx=")
-;(logr farmzoidx)
-;(logr "farmzoidy=")
-;(logr farmzoidy)
-;(logr "distance=")
-;(logr dist)
 (setq listOfOptions (append listOfOptions (list dist)))
-;(logr "listOfOptions=")
-;(logr listOfOptions)
 
 (setq i (+ i 1))
 
@@ -554,17 +476,7 @@
 (setq min (get-min 1000 listOfOptions))
 (setq minIndex (position-in-list min listOfOptions))
 
-;(logr "min=")
-;(logr min)
-;(logr "min index=")
-;(logr minIndex)
-
-
 ; --- if farmzoid doesn't have enough moves left go back home
-
-(if (>= min farmzoids2_moves)
-;(logr "Not enough farmzoids2_moves left!!!")
-)
 
 ;set moves to zero to stop loop
 (if (>= min farmzoids2_moves)
@@ -577,10 +489,6 @@
 )
 
 ; --- if farmzoid has enough moves
-
-(if (< min farmzoids2_moves)
-;(logr "It is big enough!!!")
-)
 
 ;subtract the amount of moves from farmzoids current moves
 (if (< min farmzoids2_moves)
@@ -602,20 +510,7 @@
 (setq openPlots (remove (nth minIndex openPlots) openPlots))
 )
 
-
-;(logr "farmzoid_goto=")
-;(logr farmzoid2_goto)
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "farmzoids2_moves left=")
-;(logr farmzoids2_moves)
-;(logr "currentfarmzoid=")
-;(logr currentFarmzoid)
 )
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "FINAL farmzoid2: ")
-;(logr farmzoid2_goto)
 
 ;add to js arrs to map to them
 (setq i 0)
@@ -638,14 +533,9 @@
 
 )
 
-;(js "printGoTo(2)")
-;(js "run_full_path(2)")
-
 ;-------------------------------getting where farmzoid 3 will do and list of his destinations
 
 (setq currentFarmzoid farmzoid3)
-;(logr "Currentfarmzoid location=")
-;(logr currentFarmzoid)
 
 ;going places until all the current farmzoids moves are used up
 (while (> farmzoids3_moves 0)
@@ -654,8 +544,6 @@
 (setq listOfOptions (list ))
 
 (setq size (len openPlots))
-;(logr "size of openPlots=")
-;(logr size)
 
 (while (< i size)
 (setq plot (nth i openPlots))
@@ -677,20 +565,7 @@
 )
 (setq dist (+ val1 val2))
 
-
-;(logr "plotx=")
-;(logr plotx)
-;(logr "ploty=")
-;(logr ploty)
-;(logr "farmzoidx=")
-;(logr farmzoidx)
-;(logr "farmzoidy=")
-;(logr farmzoidy)
-;(logr "distance=")
-;(logr dist)
 (setq listOfOptions (append listOfOptions (list dist)))
-;(logr "listOfOptions=")
-;(logr listOfOptions)
 
 (setq i (+ i 1))
 
@@ -700,17 +575,8 @@
 (setq min (get-min 1000 listOfOptions))
 (setq minIndex (position-in-list min listOfOptions))
 
-;(logr "min=")
-;(logr min)
-;(logr "min index=")
-;(logr minIndex)
-
 
 ; --- if farmzoid doesn't have enough moves left go back home
-
-(if (>= min farmzoids3_moves)
-;(logr "Not enough farmzoids3_moves left!!!")
-)
 
 ;set moves to zero to stop loop
 (if (>= min farmzoids3_moves)
@@ -723,10 +589,6 @@
 )
 
 ; --- if farmzoid has enough moves
-
-(if (< min farmzoids3_moves)
-;(logr "It is big enough!!!")
-)
 
 ;subtract the amount of moves from farmzoids current moves
 (if (< min farmzoids3_moves)
@@ -748,20 +610,7 @@
 (setq openPlots (remove (nth minIndex openPlots) openPlots))
 )
 
-
-;(logr "farmzoid_goto=")
-;(logr farmzoid3_goto)
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "farmzoids3_moves left=")
-;(logr farmzoids3_moves)
-;(logr "currentfarmzoid=")
-;(logr currentFarmzoid)
 )
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "FINAL farmzoid3: ")
-;(logr farmzoid3_goto)
 
 ;add to js arrs to map to them
 (setq i 0)
@@ -784,16 +633,11 @@
 
 )
 
-;(js "printGoTo(3)")
-;(js "run_full_path(3)")
-
 
 
 ;-------------------------------getting where farmzoid 4 will do and list of his destinations
 
-;(setq currentFarmzoid farmzoid4)
-;(logr "Currentfarmzoid location=")
-;(logr currentFarmzoid)
+(setq currentFarmzoid farmzoid4)
 
 ;going places until all the farmzoids moves are used up
 (while (> farmzoids4_moves 0)
@@ -802,8 +646,6 @@
 (setq listOfOptions (list ))
 
 (setq size (len openPlots))
-;(logr "size of openPlots=")
-;(logr size)
 
 (while (< i size)
 (setq plot (nth i openPlots))
@@ -825,20 +667,7 @@
 )
 (setq dist (+ val1 val2))
 
-
-;(logr "plotx=")
-;(logr plotx)
-;(logr "ploty=")
-;(logr ploty)
-;(logr "farmzoidx=")
-;(logr farmzoidx)
-;(logr "farmzoidy=")
-;(logr farmzoidy)
-;(logr "distance=")
-;(logr dist)
 (setq listOfOptions (append listOfOptions (list dist)))
-;(logr "listOfOptions=")
-;(logr listOfOptions)
 
 (setq i (+ i 1))
 
@@ -848,17 +677,7 @@
 (setq min (get-min 1000 listOfOptions))
 (setq minIndex (position-in-list min listOfOptions))
 
-;(logr "min=")
-;(logr min)
-;(logr "min index=")
-;(logr minIndex)
-
-
 ; --- if farmzoid doesn't have enough moves left go back home
-
-(if (>= min farmzoids4_moves)
-;(logr "Not enough farmzoids4_moves left!!!")
-)
 
 ;set moves to zero to stop loop
 (if (>= min farmzoids4_moves)
@@ -871,10 +690,6 @@
 )
 
 ; --- if farmzoid has enough moves
-
-(if (< min farmzoids4_moves)
-;(logr "It is big enough!!!")
-)
 
 ;subtract the amount of moves from farmzoids current moves
 (if (< min farmzoids4_moves)
@@ -896,20 +711,7 @@
 (setq openPlots (remove (nth minIndex openPlots) openPlots))
 )
 
-
-;(logr "farmzoid_goto=")
-;(logr farmzoid4_goto)
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "farmzoids4_moves left=")
-;(logr farmzoids4_moves)
-;(logr "currentfarmzoid=")
-;(logr currentFarmzoid)
 )
-;(logr "openPlots=")
-;(logr openPlots)
-;(logr "FINAL farmzoid4: ")
-;(logr farmzoid4_goto)
 
 ;add to js arrs to map to them
 (setq i 0)
@@ -931,23 +733,129 @@
 (setq i (+ i 1))
 
 )
+                        
 
-;(js "printGoTo(4)")
-;(js "run_full_path(4)")
+                        ;If it is Sunny go and water
+                        (if (eq nature "Sunny")
+                          (let()
+                            (js "run_full_path(1)")
+                            (js "run_full_path(2)")
+                            (js "run_full_path(3)")
+                            (js "run_full_path(4)")
+                            (js "drawit = true")
+                          )
+                        )
 
 
-                        (js "printGoTo(1)")
-                        (js "printGoTo(2)")
-                        (js "printGoTo(3)")
-                        (js "printGoTo(4)")
+                        ;If it is Cloudy go and water
+                        (if (eq nature "Cloudy")
+                          (let()
+                            (js "run_full_path(1)")
+                            (js "run_full_path(2)")
+                            (js "run_full_path(3)")
+                            (js "run_full_path(4)")
+                            (js "drawit = true")
+                          )
+                        )
 
-                        (js "run_full_path(1)")
-                        (js "run_full_path(2)")
-                        (js "run_full_path(3)")
-                        (js "run_full_path(4)")
-                        (js "drawit = true")
-                      )
-                    )
+                        ;If it is Rainy Water All && Pick New Path
+
+                            ;farmzoid 1
+                            (setq plot (nth 0 openPlots))
+                            (setq plotx (nth 0 plot))
+                            (setq ploty (nth 1 plot))
+                            (setq code1 "farmzoid1_goto = [ [")
+                            (setq code1 (concat code1 plotx))
+                            (setq code1 (concat code1 ","))
+                            (setq code1 (concat code1 ploty))
+                            (setq code1 (concat code1 "], [18,19] ];"))
+                            (setq checkoffspots_code1 "farmzoid1_checkoffspots = [ [")
+                            (setq checkoffspots_code1 (concat checkoffspots_code1 plotx))
+                            (setq checkoffspots_code1 (concat checkoffspots_code1 ","))
+                            (setq checkoffspots_code1 (concat checkoffspots_code1 ploty))
+                            (setq checkoffspots_code1 (concat checkoffspots_code1 "], [18,19] ];"))
+
+                            ;farmzoid 2
+                            (setq plot (nth 1 openPlots))
+                            (setq plotx (nth 0 plot))
+                            (setq ploty (nth 1 plot))
+                            (setq code2 "farmzoid2_goto = [ [")
+                            (setq code2 (concat code2 plotx))
+                            (setq code2 (concat code2 ","))
+                            (setq code2 (concat code2 ploty))
+                            (setq code2 (concat code2 "], [19,18] ];"))
+                            (setq checkoffspots_code2 "farmzoid2_checkoffspots = [ [")
+                            (setq checkoffspots_code2 (concat checkoffspots_code2 plotx))
+                            (setq checkoffspots_code2 (concat checkoffspots_code2 ","))
+                            (setq checkoffspots_code2 (concat checkoffspots_code2 ploty))
+                            (setq checkoffspots_code2 (concat checkoffspots_code2 "], [19,18] ];"))
+
+                            ;farmzoid 3
+                            (setq plot (nth 2 openPlots))
+                            (setq plotx (nth 0 plot))
+                            (setq ploty (nth 1 plot))
+                            (setq code3 "farmzoid3_goto = [ [")
+                            (setq code3 (concat code3 plotx))
+                            (setq code3 (concat code3 ","))
+                            (setq code3 (concat code3 ploty))
+                            (setq code3 (concat code3 "], [19,20] ];"))
+                            (setq checkoffspots_code3 "farmzoid3_checkoffspots = [ [")
+                            (setq checkoffspots_code3 (concat checkoffspots_code3 plotx))
+                            (setq checkoffspots_code3 (concat checkoffspots_code3 ","))
+                            (setq checkoffspots_code3 (concat checkoffspots_code3 ploty))
+                            (setq checkoffspots_code3 (concat checkoffspots_code3 "], [19,20] ];"))
+
+                            ;farmzoid 4
+                            (setq plot (nth 3 openPlots))
+                            (setq plotx1 (nth 0 plot))
+                            (setq ploty1 (nth 1 plot))
+                            (setq plot (nth 4 openPlots))
+                            (setq plotx2 (nth 0 plot))
+                            (setq ploty2 (nth 1 plot))
+                            (setq code4 "farmzoid4_goto = [ [")
+                            (setq code4 (concat code4 plotx1))
+                            (setq code4 (concat code4 ","))
+                            (setq code4 (concat code4 ploty1))
+                            (setq code4 (concat code4 "] , ["))
+                            (setq code4 (concat code4 plotx2))
+                            (setq code4 (concat code4 ","))
+                            (setq code4 (concat code4 ploty2))
+                            (setq code4 (concat code4 "], [20,19] ];"))
+                            (setq checkoffspots_code4 "farmzoid4_checkoffspots = [ [")
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 plotx1))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 ","))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 ploty1))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 "] , ["))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 plotx2))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 ","))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 ploty2))
+                            (setq checkoffspots_code4 (concat checkoffspots_code4 "], [20,19] ];"))
+
+
+                        (if (eq nature "Rain")
+                          (let()
+                            (js code1)
+                            (js code2)
+                            (js code3)
+                            (js code4)
+
+                            (js checkoffspots_code1)
+                            (js checkoffspots_code2)
+                            (js checkoffspots_code3)
+                            (js checkoffspots_code4)
+
+                            (js "run_full_path(1)")
+                            (js "run_full_path(2)")
+                            (js "run_full_path(3)")
+                            (js "run_full_path(4)")
+
+                            (js "waterAll()")
+
+                            (js "shouldBotsMoveWhenRaining()")
+                          )
+                        )
+         )
+        )
       )
     )
     (set button "onclick" (export clickHandler))
