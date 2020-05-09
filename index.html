@@ -21,9 +21,9 @@
     <div class="container">
   <div class="row">
       <span class="h4">Day = <span id="dayCount" class="h4">0</span> </span>
-      <span class="h4" id="wind"></span>
        <span id="displayer"></span>
       <button id="nextDay" type="button" class="btn btn-success mr-3">Start Farm</button>
+      <span class="h4">Total Harvested = <span id="fruitHarvested" class="h4">0</span> </span>
   </div>
   <br>
 </div>
@@ -222,7 +222,101 @@
 
 <script type="text/lisp">
 
-;---------------------------------------------------WHERE TO GO
+;Helper function to get a randomized weather
+(defun getNature (rand)
+  (if (> 1 rand)
+    (setq n "Cloudy")
+    (setq n "Sunny")
+  )
+)
+
+(defun getWind (rand)
+  (if (> 1 rand)
+    (setq n "Wind")
+    (setq n "None")
+  )
+)
+
+;Setting an on click handler for the next day button to run logic to next day
+(let*
+    ((button (getElement "nextDay"))
+      (clickHandler (lambda ()
+                      (let ((nature (getNature (* 10 (random 1))))
+                            (wind (getWind (* 10 (random 4))))
+                           )
+
+                        ;Increment the date to the next day and set the display
+                        (js "incrementDate()")
+
+                        ;If it is Windy, if so what direction?
+                        (setq rand (* 10 (random 10)))
+                        (if (eq wind "Wind")
+                          (let()
+                            (logr rand)
+                            (if (> 2.5 rand)
+                              (let  ((w (js "document.getElementById('wind')")))
+                                (set w "innerHTML" "Wind - N")
+                              )
+                            )
+                            (if (> 5 rand)
+                              (let  ((w (js "document.getElementById('wind')")))
+                                (set w "innerHTML" "Wind - S")
+                              )
+                            )
+                            (if (> 7.5 rand)
+                              (let  ((w (js "document.getElementById('wind')")))
+                                (set w "innerHTML" "Wind - W")
+                              )
+                              (let  ((w (js "document.getElementById('wind')")))
+                                (set w "innerHTML" "Wind - E")
+                              )
+                            )
+                          )
+                          (let  ((w (js "document.getElementById('wind')")))
+                                (set w "innerHTML" "")
+                              )
+                        )
+
+                        ;If it is Cloudy is it also raining?
+                        (if (eq nature "Cloudy")
+                          (if (> 4 (* 10 (random 1)))
+                              (setq nature "Rain")
+                          )
+                        )
+                        (logr "Weather: ")
+                        (logr nature)
+                        (logr "Wind: ")
+                        (logr wind)
+
+                        ;Setting the picture to display the current weather
+                        (if (eq nature "Sunny")
+                          (let  ((w (js "document.getElementById('displayer')")))
+                            (set w "innerHTML" "<img src='images/sun.png' style='width:50px;height:50px;'>")
+                          )
+                        )
+                        (if (eq nature "Cloudy")
+                          (let  ((w (js "document.getElementById('displayer')")))
+                            (set w "innerHTML" "<img src='images/cloud.png' style='width:50px;height:50px;'>")
+                          )
+                        )
+                        (if (eq nature "Rain")
+                          (let  ((w (js "document.getElementById('displayer')")))
+                            (set w "innerHTML" "<img src='images/rain.png' style='width:50px;height:50px;'>")
+                          )
+                        )
+
+                        ;run the whatToDo function passing in the nature parameter
+                        (setq jscode (concat "whatToDo('" nature))
+                        (setq jscode (concat jscode "')"))
+                        ;(js jscode)
+
+
+                        ;Changing the button to next Day if after start
+                        (let  ((btn (js "document.getElementById('nextDay')")))
+                          (set btn "innerHTML" "Next Day")
+                        )
+
+                        ;---------------------------------------------------WHERE TO GO
 
 ;lists to display locations within farm
 (def plots (list '(3 33) '(5 5) '(5 10) '(5 21) '(5 26) '(7 15) '(8 10) '(8 21) '(10 15) '(12 27) '(12 34) '(14 3) '(15 14) '(15 29) '(16 35) '(19 32) '(20 10) '(23 29) '(26 31) '(27 24) '(30 31) '(31 27) '(33 36) '(34 26) '(36 34) ))
@@ -396,7 +490,8 @@
 
 )
 
-(js "printGoTo(1)")
+;(js "printGoTo(1)")
+;(js "run_full_path(1)")
 
 
 
@@ -544,7 +639,7 @@
 )
 
 ;(js "printGoTo(2)")
-
+;(js "run_full_path(2)")
 
 ;-------------------------------getting where farmzoid 3 will do and list of his destinations
 
@@ -690,6 +785,7 @@
 )
 
 ;(js "printGoTo(3)")
+;(js "run_full_path(3)")
 
 
 
@@ -837,102 +933,19 @@
 )
 
 ;(js "printGoTo(4)")
+;(js "run_full_path(4)")
 
 
+                        (js "printGoTo(1)")
+                        (js "printGoTo(2)")
+                        (js "printGoTo(3)")
+                        (js "printGoTo(4)")
 
-;Helper function to get a randomized weather
-(defun getNature (rand)
-  (if (> 1 rand)
-    (setq n "Cloudy")
-    (setq n "Sunny")
-  )
-)
-
-(defun getWind (rand)
-  (if (> 1 rand)
-    (setq n "Wind")
-    (setq n "None")
-  )
-)
-
-;Setting an on click handler for the next day button to run logic to next day
-(let*
-    ((button (getElement "nextDay"))
-      (clickHandler (lambda ()
-                      (let ((nature (getNature (* 10 (random 1))))
-                            (wind (getWind (* 10 (random 4))))
-                           )
-
-                        ;Increment the date to the next day and set the display
-                        (js "incrementDate()")
-
-                        ;If it is Windy, if so what direction?
-                        (setq rand (* 10 (random 10)))
-                        (if (eq wind "Wind")
-                          (let()
-                            (logr rand)
-                            (if (> 2.5 rand)
-                              (let  ((w (js "document.getElementById('wind')")))
-                                (set w "innerHTML" "Wind - N")
-                              )
-                            )
-                            (if (> 5 rand)
-                              (let  ((w (js "document.getElementById('wind')")))
-                                (set w "innerHTML" "Wind - S")
-                              )
-                            )
-                            (if (> 7.5 rand)
-                              (let  ((w (js "document.getElementById('wind')")))
-                                (set w "innerHTML" "Wind - W")
-                              )
-                              (let  ((w (js "document.getElementById('wind')")))
-                                (set w "innerHTML" "Wind - E")
-                              )
-                            )
-                          )
-                          (let  ((w (js "document.getElementById('wind')")))
-                                (set w "innerHTML" "")
-                              )
-                        )
-
-                        ;If it is Cloudy is it also raining?
-                        (if (eq nature "Cloudy")
-                          (if (> 4 (* 10 (random 1)))
-                              (setq nature "Rain")
-                          )
-                        )
-                        (logr "Weather: ")
-                        (logr nature)
-                        (logr "Wind: ")
-                        (logr wind)
-
-                        ;Setting the picture to display the current weather
-                        (if (eq nature "Sunny")
-                          (let  ((w (js "document.getElementById('displayer')")))
-                            (set w "innerHTML" "<img src='images/sun.png' style='width:50px;height:50px;'>")
-                          )
-                        )
-                        (if (eq nature "Cloudy")
-                          (let  ((w (js "document.getElementById('displayer')")))
-                            (set w "innerHTML" "<img src='images/cloud.png' style='width:50px;height:50px;'>")
-                          )
-                        )
-                        (if (eq nature "Rain")
-                          (let  ((w (js "document.getElementById('displayer')")))
-                            (set w "innerHTML" "<img src='images/rain.png' style='width:50px;height:50px;'>")
-                          )
-                        )
-
-                        ;run the whatToDo function passing in the nature parameter
-                        (setq jscode (concat "whatToDo('" nature))
-                        (setq jscode (concat jscode "')"))
-                        ;(js jscode)
-
-
-                        ;Changing the button to next Day if after start
-                        (let  ((btn (js "document.getElementById('nextDay')")))
-                          (set btn "innerHTML" "Next Day")
-                        )
+                        (js "run_full_path(1)")
+                        (js "run_full_path(2)")
+                        (js "run_full_path(3)")
+                        (js "run_full_path(4)")
+                        (js "drawit = true")
                       )
                     )
       )
