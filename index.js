@@ -484,7 +484,7 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
     ++g_frame_cnt;
     if (0 == g_frame_cnt % g_frame_mod)
     {
-        //check each if position isn't undefined to make sure it isn't at the end of its journey 
+        //check each if position isn't undefined to make sure it isn't at the end of its journey
         if(farmzoid1Pos != undefined)
         {
             farm[farmzoid1Pos[0]][farmzoid1Pos[1]] = "open";
@@ -506,26 +506,26 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         }
         else if(isInArray(farmzoid1_checkoffspots,x+1,y))
         {
-            advanceStage(1,x+1,y);   
+            advanceStage(1,x+1,y);
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x+1,y);
 
         }
         else if(isInArray(farmzoid1_checkoffspots,x,y-1))
         {
-            advanceStage(1,x,y-1); 
+            advanceStage(1,x,y-1);
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid1_checkoffspots,x,y+1))
         {
-            advanceStage(1,x,y+1); 
+            advanceStage(1,x,y+1);
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid1_checkoffspots,x,y))
         {
-            advanceStage(1,x,y); 
+            advanceStage(1,x,y);
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x,y);
         }
-        
+
         }
         if(farmzoid1Pos == undefined)
         {
@@ -534,19 +534,19 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
 
 
 
-        //check each if position isn't undefined to make sure it isn't at the end of its journey 
+        //check each if position isn't undefined to make sure it isn't at the end of its journey
         if(farmzoid2Pos != undefined)
         {
             farm[farmzoid2Pos[0]][farmzoid2Pos[1]] = "open";
         }
         //move to next path location
-        farmzoid2Pos = farmzoid2Path.shift();   
+        farmzoid2Pos = farmzoid2Path.shift();
         if(farmzoid2Pos != undefined)
         {
             farm[farmzoid2Pos[0]][farmzoid2Pos[1]] = "farmzoid2";
         }
         if(farmzoid2Pos != undefined)
-        {     
+        {
         //check if bot has neared the spot it needs to tend to
         var x=farmzoid2Pos[0],y=farmzoid2Pos[1];
         if(isInArray(farmzoid2_checkoffspots,x-1,y))
@@ -556,26 +556,26 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         }
         else if(isInArray(farmzoid2_checkoffspots,x+1,y))
         {
-            advanceStage(2,x+1,y);   
+            advanceStage(2,x+1,y);
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x+1,y);
 
         }
         else if(isInArray(farmzoid2_checkoffspots,x,y-1))
         {
-            advanceStage(2,x,y-1); 
+            advanceStage(2,x,y-1);
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid2_checkoffspots,x,y+1))
         {
-            advanceStage(2,x,y+1); 
+            advanceStage(2,x,y+1);
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid2_checkoffspots,x,y))
         {
-            advanceStage(2,x,y); 
+            advanceStage(2,x,y);
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x,y);
         }
-        
+
         }
         if(farmzoid2Pos == undefined)
         {
@@ -584,7 +584,7 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
 
 
 
-        //check each if position isn't undefined to make sure it isn't at the end of its journey 
+        //check each if position isn't undefined to make sure it isn't at the end of its journey
         if(farmzoid3Pos != undefined)
         {
             farm[farmzoid3Pos[0]][farmzoid3Pos[1]] = "open";
@@ -606,26 +606,26 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         }
         else if(isInArray(farmzoid3_checkoffspots,x+1,y))
         {
-            advanceStage(3,x+1,y);   
+            advanceStage(3,x+1,y);
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x+1,y);
 
         }
         else if(isInArray(farmzoid3_checkoffspots,x,y-1))
         {
-            advanceStage(3,x,y-1); 
+            advanceStage(3,x,y-1);
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid3_checkoffspots,x,y+1))
         {
-            advanceStage(3,x,y+1); 
+            advanceStage(3,x,y+1);
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid3_checkoffspots,x,y))
         {
-            advanceStage(3,x,y); 
+            advanceStage(3,x,y);
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x,y);
         }
-        
+
         }
         if(farmzoid3Pos == undefined)
         {
@@ -644,7 +644,7 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         if(farmzoid4Pos != undefined)
         {
             farm[farmzoid4Pos[0]][farmzoid4Pos[1]] = "farmzoid4";
-        } 
+        }
         if(farmzoid4Pos != undefined)
         {
         //check if bot has neared the spot it needs to tend to
@@ -656,25 +656,25 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         }
         else if(isInArray(farmzoid4_checkoffspots,x+1,y))
         {
-            advanceStage(4,x+1,y);   
+            advanceStage(4,x+1,y);
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x+1,y);
         }
         else if(isInArray(farmzoid4_checkoffspots,x,y-1))
-        { 
-            advanceStage(4,x,y-1); 
+        {
+            advanceStage(4,x,y-1);
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid4_checkoffspots,x,y+1))
         {
-            advanceStage(4,x,y+1); 
+            advanceStage(4,x,y+1);
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid4_checkoffspots,x,y))
         {
-            advanceStage(4,x,y); 
+            advanceStage(4,x,y);
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x,y);
         }
-        
+
         }
         if(farmzoid4Pos == undefined)
         {
@@ -759,6 +759,62 @@ function run_full_path(zoidNum)
   }
 }
 
+//This function calls the function that will find the path between two points
+// It will run until paths between all the points a farmzoid must visit are made
+function run_full_path(zoidNum)
+{
+  let current=[];
+
+  //Checks which farmzoid is being referenced
+  switch (zoidNum)
+  {
+    case 1: current = farmzoid1Pos;
+            //Loops until all the points a farmzoid must visit are checked
+            while (farmzoid1_goto != undefined && farmzoid1_goto.length != 0)
+            {
+              let passVar = [];
+              passVar = farmzoid1_goto.shift();
+              find_path(1,current,passVar);
+              current = farmzoid1Path[farmzoid1Path.length - 1];
+            }
+            break;
+
+    case 2: current = farmzoid2Pos;
+            while (farmzoid2_goto != undefined && farmzoid2_goto.length != 0)
+            {
+              let passVar = [];
+              passVar = farmzoid2_goto.shift();
+              find_path(2,current,passVar);
+              current = farmzoid2Path[farmzoid2Path.length - 1];
+            }
+            break;
+
+    case 3: current = farmzoid3Pos;
+            while (farmzoid3_goto != undefined && farmzoid3_goto.length != 0)
+            {
+              let passVar = [];
+              passVar = farmzoid3_goto.shift();
+              find_path(3,current,passVar);
+              current = farmzoid3Path[farmzoid3Path.length - 1];
+            }
+            break;
+
+    case 4: current = farmzoid4Pos;
+            while (farmzoid4_goto != undefined && farmzoid4_goto.length != 0)
+            {
+              let passVar = [];
+              passVar = farmzoid4_goto.shift();
+              find_path(4,current,passVar);
+              current = farmzoid4Path[farmzoid4Path.length - 1];
+            }
+            break;
+
+  }
+}
+
+//This function will create a path between a starting and ending point.
+// Will add the path to the appropriate farmzoid. Will also call a function
+// to help avoid plots of land so the farmzoid does not step on them
 function find_path(zoidNum, startPoint, endPoint)
 {
   let current = [];
@@ -766,10 +822,15 @@ function find_path(zoidNum, startPoint, endPoint)
   current = startPoint;
   let lookAhead = [0,0];
 
+  //Loops until the farmzoid is adjacent to the final point it is going to
+  // Calls function neighbors to determine if they are adjacent
   while (!neighbors (current, endPoint))
   {
     let lookAhead = [0,0];
 
+    //The next two if else dontitionals will check if the farmzoid is on the
+    // colum or row. If neither is the same, it will make the farmzoid move
+    // diagonally.  If either row or colum are equal, it'll move straight
     if (current[0] > endPoint[0])
     {
       lookAhead[0] = current[0] - 1;
@@ -796,6 +857,10 @@ function find_path(zoidNum, startPoint, endPoint)
       lookAhead[1] = current[1];
     }
 
+    //Calls a function to check and see if the spot the farmzoid is going to
+    // move to is empty or not. If it is not empty, it'll walk around it.
+    // If the farmzoid was planning on walking diagonally, it will choose the
+    // correct way to go without adding extra steps
     if (!empty(lookAhead[0],lookAhead[1]))
     {
       if (current[0] == endPoint[0])
@@ -813,21 +878,22 @@ function find_path(zoidNum, startPoint, endPoint)
 
     }
 
+    //This switch statement will add to the path to the correct farmzoid
     switch(zoidNum)
     {
-      case 1: 
+      case 1:
               farmzoid1Path.push(lookAhead);
               current = lookAhead;
               break;
-      case 2: 
+      case 2:
               farmzoid2Path.push(lookAhead);
               current = lookAhead;
               break;
-      case 3: 
+      case 3:
               farmzoid3Path.push(lookAhead);
               current = lookAhead;
               break;
-      case 4: 
+      case 4:
               farmzoid4Path.push(lookAhead);
               current = lookAhead;
               break;
@@ -835,6 +901,8 @@ function find_path(zoidNum, startPoint, endPoint)
   }
 }
 
+//This function checks to see if the farmzoid is adjacent to the final point
+// it is trying to reach.
 function neighbors(startPoint, endPoint)
 {
   if (abs(startPoint[0] - endPoint[0]) <= 1 && abs(startPoint[1] - endPoint[1]) <= 1)
@@ -848,6 +916,7 @@ function neighbors(startPoint, endPoint)
   }
 }
 
+//checks to make sure there is not a plot of land or any plants on a given cell
 function empty (rowCord, colCord)
 {
   if (farm[rowCord][colCord] == "open" || farm[rowCord][colCord] == "farmzoid1" || farm[rowCord][colCord] == "farmzoid2" || farm[rowCord][colCord] == "farmzoid3" || farm[rowCord][colCord] == "farmzoid4")
@@ -860,6 +929,10 @@ function empty (rowCord, colCord)
   }
 }
 
+
+//the function will be given a start point and an end point. It will give two
+// possible options of avoiding an obstacle and then calculate the euclidean
+// distance to pick the closer path.
 function find_closer(pointA, pointB)
 {
   let optionA = [0,0];
@@ -891,6 +964,7 @@ function find_closer(pointA, pointB)
     optionA[1] = pointA[1] + 1;
     optionB[0] = pointB[0] - 1;
   }
+  //Calls a helper function that calculates the euclidean distance
   if (distance(optionA,pointB) < distance(optionB,pointB))
   {
     return optionA;
@@ -901,6 +975,7 @@ function find_closer(pointA, pointB)
   }
 }
 
+//This function takes two points and calculates the euclidean distance
 function distance(pointA, pointB)
 {
   xDiff = Math.pow(pointA[1] - pointB[1],2);
