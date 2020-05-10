@@ -106,6 +106,9 @@ for(var i=0; i < 40; i++)
 
 //------------------------------------------------------------FARM LOGIC
 
+//holds the weather for the day
+var weather = "";
+
 //used by lisp to set the go to locations for each farmzoid
 function addToFarmZoidGoTo(farmzoidNum, x, y)
 {
@@ -146,82 +149,139 @@ function addToFarmZoidGoTo(farmzoidNum, x, y)
 function incrementDate()
 {
     farmDayCounter++;
+    console.log("DAY " + farmDayCounter);
     $("#dayCount").html(farmDayCounter);
 }
 
 //call this each time plot is visited and pass in the plot
-function advanceStage(x,y)
+function advanceStage(farmzoidNum,x,y)
 {
     if(farm[x][y] == "empty plot")
     {
+        console.log("Farmzoid" + farmzoidNum + " is planting a seed.")
         farm[x][y] = "seed1"
     }
     else if (farm[x][y] == "seed1")
     {
-        farm[x][y] = "stalk2"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "stalk2"
+        }
     }
     else if (farm[x][y] == "stalk2")
     {
-        farm[x][y] = "stalk3"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "stalk3"
+        }
     }
     else if (farm[x][y] == "stalk3")
     {
-        farm[x][y] = "stalk4"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "stalk4"
+        }
     }
     else if (farm[x][y] == "stalk4")
     {
-        farm[x][y] = "bush5"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "bush5"
+        }
     }
     else if (farm[x][y] == "bush5")
     {
-        farm[x][y] = "bush6"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "bush6"
+        }
     }
     else if (farm[x][y] == "bush6")
     {
-        farm[x][y] = "bush7"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "bush7"
+        }
     }
     else if (farm[x][y] == "bush7")
     {
-        farm[x][y] = "bush8"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "bush8"
+        }
     }
     else if (farm[x][y] == "bush8")
     {
-        farm[x][y] = "bush9"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "bush9"
+        }
     }
     else if (farm[x][y] == "bush9")
     {
-        farm[x][y] = "bush10"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "bush10"
+        }
     }
     else if (farm[x][y] == "bush10")
     {
-        farm[x][y] = "flower11"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "flower11"
+        }
     }
     else if (farm[x][y] == "flower11")
     {
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
         farm[x][y] = "flower12"
+        }
     }
     else if (farm[x][y] == "flower12")
     {
-        farm[x][y] = "flower13"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "flower13"
+        }
     }
     else if (farm[x][y] == "flower13")
     {
-        farm[x][y] = "fruit14"
+        console.log("Farmzoid" + farmzoidNum + " is watering a plant.")
+        if(weather != "Cloudy")
+        {
+            farm[x][y] = "fruit14"
+        }
     }
     else if (farm[x][y] == "fruit14")
     {
+        console.log("Farmzoid" + farmzoidNum + " is picking a fruit.")
         farm[x][y] = "empty plot"
         fruitHarvestedTotal++;
         $("#fruitHarvested").html(fruitHarvestedTotal);
     }
     else if (farm[x][y] == "fruit15")
     {
+        console.log("Farmzoid" + farmzoidNum + " is picking a fruit.")
         farm[x][y] = "empty plot"
         fruitHarvestedTotal++;
         $("#fruitHarvested").html(fruitHarvestedTotal);
     }
     else if (farm[x][y] == "fruit16")
     {
+        console.log("Farmzoid" + farmzoidNum + " is picking a fruit.")
         farm[x][y] = "empty plot"
         fruitHarvestedTotal++;
         $("#fruitHarvested").html(fruitHarvestedTotal);
@@ -302,34 +362,6 @@ function waterAll()
         }
     }
 
-}
-
-function shouldBotsMoveWhenRaining()
-{
-    x1 = farmzoid1_checkoffspots[0][0];
-    x2 = farmzoid2_checkoffspots[0][0];
-    x3 = farmzoid3_checkoffspots[0][0];
-    x4 = farmzoid4_checkoffspots[0][0];
-    x42 = farmzoid4_checkoffspots[1][0];
-
-    y1 = farmzoid1_checkoffspots[0][1];
-    y2 = farmzoid2_checkoffspots[0][1];
-    y3 = farmzoid3_checkoffspots[0][1];
-    y4 = farmzoid4_checkoffspots[0][1];
-    y42 = farmzoid4_checkoffspots[1][1];
-
-    if(farm[x1][y1] == "empty plot" || farm[x2][y2] == "empty plot" || farm[x3][y3] == "empty plot" || farm[x4][y4] == "empty plot" || farm[x42][y42] == "empty plot")
-    {
-        drawit = true;
-    }
-    else if (farm[x1][y1].includes("fruit") || farm[x2][y2].includes("fruit") || farm[x3][y3].includes("fruit") || farm[x4][y4].includes("fruit") || farm[x42][y42].includes("fruit"))
-    {
-        drawit = true;
-    }
-    else
-    {
-        document.getElementById("nextDay").click();
-    }
 }
 
 //-------------------------------------------------DRAW LOGIC
@@ -469,28 +501,28 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         var x=farmzoid1Pos[0],y=farmzoid1Pos[1];
         if(isInArray(farmzoid1_checkoffspots,x-1,y))
         {
-            advanceStage(x-1,y);
+            advanceStage(1,x-1,y);
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x-1,y);
         }
         else if(isInArray(farmzoid1_checkoffspots,x+1,y))
         {
-            advanceStage(x+1,y);   
+            advanceStage(1,x+1,y);   
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x+1,y);
 
         }
         else if(isInArray(farmzoid1_checkoffspots,x,y-1))
         {
-            advanceStage(x,y-1); 
+            advanceStage(1,x,y-1); 
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid1_checkoffspots,x,y+1))
         {
-            advanceStage(x,y+1); 
+            advanceStage(1,x,y+1); 
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid1_checkoffspots,x,y))
         {
-            advanceStage(x,y); 
+            advanceStage(1,x,y); 
             farmzoid1_checkoffspots = removeFromArray(farmzoid1_checkoffspots,x,y);
         }
         
@@ -519,28 +551,28 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         var x=farmzoid2Pos[0],y=farmzoid2Pos[1];
         if(isInArray(farmzoid2_checkoffspots,x-1,y))
         {
-            advanceStage(x-1,y);
+            advanceStage(2,x-1,y);
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x-1,y);
         }
         else if(isInArray(farmzoid2_checkoffspots,x+1,y))
         {
-            advanceStage(x+1,y);   
+            advanceStage(2,x+1,y);   
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x+1,y);
 
         }
         else if(isInArray(farmzoid2_checkoffspots,x,y-1))
         {
-            advanceStage(x,y-1); 
+            advanceStage(2,x,y-1); 
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid2_checkoffspots,x,y+1))
         {
-            advanceStage(x,y+1); 
+            advanceStage(2,x,y+1); 
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid2_checkoffspots,x,y))
         {
-            advanceStage(x,y); 
+            advanceStage(2,x,y); 
             farmzoid2_checkoffspots = removeFromArray(farmzoid2_checkoffspots,x,y);
         }
         
@@ -569,28 +601,28 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         var x=farmzoid3Pos[0],y=farmzoid3Pos[1];
         if(isInArray(farmzoid3_checkoffspots,x-1,y))
         {
-            advanceStage(x-1,y);
+            advanceStage(3,x-1,y);
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x-1,y);
         }
         else if(isInArray(farmzoid3_checkoffspots,x+1,y))
         {
-            advanceStage(x+1,y);   
+            advanceStage(3,x+1,y);   
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x+1,y);
 
         }
         else if(isInArray(farmzoid3_checkoffspots,x,y-1))
         {
-            advanceStage(x,y-1); 
+            advanceStage(3,x,y-1); 
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid3_checkoffspots,x,y+1))
         {
-            advanceStage(x,y+1); 
+            advanceStage(3,x,y+1); 
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid3_checkoffspots,x,y))
         {
-            advanceStage(x,y); 
+            advanceStage(3,x,y); 
             farmzoid3_checkoffspots = removeFromArray(farmzoid3_checkoffspots,x,y);
         }
         
@@ -619,27 +651,27 @@ function draw()  // P5 Frame Re-draw Fcn, Called for Every Frame.
         var x=farmzoid4Pos[0],y=farmzoid4Pos[1];
         if(isInArray(farmzoid4_checkoffspots,x-1,y))
         {
-            advanceStage(x-1,y);
+            advanceStage(4,x-1,y);
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x-1,y);
         }
         else if(isInArray(farmzoid4_checkoffspots,x+1,y))
         {
-            advanceStage(x+1,y);   
+            advanceStage(4,x+1,y);   
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x+1,y);
         }
         else if(isInArray(farmzoid4_checkoffspots,x,y-1))
         { 
-            advanceStage(x,y-1); 
+            advanceStage(4,x,y-1); 
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x,y-1);
         }
         else if(isInArray(farmzoid4_checkoffspots,x,y+1))
         {
-            advanceStage(x,y+1); 
+            advanceStage(4,x,y+1); 
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x,y+1);
         }
         else if (isInArray(farmzoid4_checkoffspots,x,y))
         {
-            advanceStage(x,y); 
+            advanceStage(4,x,y); 
             farmzoid4_checkoffspots = removeFromArray(farmzoid4_checkoffspots,x,y);
         }
         
